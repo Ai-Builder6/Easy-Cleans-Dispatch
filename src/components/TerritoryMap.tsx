@@ -1017,7 +1017,11 @@ export const TerritoryMap: React.FC<TerritoryMapProps> = ({
             onError={() => setLocalMapError(true)}
           >
             <Map
-              mapId={import.meta.env.VITE_GOOGLE_MAPS_MAP_ID || "DEMO_MAP_ID"}
+              mapId={
+                (import.meta.env.VITE_GOOGLE_MAPS_MAP_ID && !import.meta.env.VITE_GOOGLE_MAPS_MAP_ID.startsWith("AIza"))
+                  ? import.meta.env.VITE_GOOGLE_MAPS_MAP_ID
+                  : "2bd06c0db10a0a3ccd4c8603"
+              }
               mapTypeId={mapType}
               defaultCenter={{ lat: 53.5461, lng: -113.4938 }}
               defaultZoom={11}

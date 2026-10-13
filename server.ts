@@ -97,11 +97,19 @@ if (geminiApiKey) {
   });
 }
 
+function resolveCleanMapId(): string {
+  const envMapId = process.env.VITE_GOOGLE_MAPS_MAP_ID || process.env.GOOGLE_MAPS_MAP_ID || "";
+  if (!envMapId || envMapId.startsWith("AIza") || envMapId.length > 32) {
+    return "2bd06c0db10a0a3ccd4c8603";
+  }
+  return envMapId;
+}
+
 // Google Maps API Key configuration endpoint (safely provides public client key only)
 app.get("/api/config", (req, res) => {
   res.json({
     mapsApiKey: process.env.VITE_GOOGLE_MAPS_API_KEY || "",
-    mapId: process.env.VITE_GOOGLE_MAPS_MAP_ID || "2bd06c0db10a0a3ccd4c8603",
+    mapId: resolveCleanMapId(),
     hasMapsKey: Boolean(process.env.VITE_GOOGLE_MAPS_API_KEY),
     hasGeminiKey: Boolean(geminiApiKey),
   });
@@ -110,7 +118,7 @@ app.get("/api/config", (req, res) => {
 app.get("/api/maps/config", (req, res) => {
   res.json({
     mapsApiKey: process.env.VITE_GOOGLE_MAPS_API_KEY || "",
-    mapId: process.env.VITE_GOOGLE_MAPS_MAP_ID || "2bd06c0db10a0a3ccd4c8603",
+    mapId: resolveCleanMapId(),
     hasMapsKey: Boolean(process.env.VITE_GOOGLE_MAPS_API_KEY),
   });
 });
@@ -959,6 +967,9 @@ function getAppBaseUrl(req: express.Request): string {
   }
   // Jobber strictly requires HTTPS for OAuth redirect URIs
   const forwardedHost = (req.headers["x-forwarded-host"] as string) || req.get("host") || "";
+  if (forwardedHost.includes("easycleans.si")) {
+    return "https://easycleans.si";
+  }
   if (forwardedHost.includes("dispatchgeeni.com") || forwardedHost.includes("dispatchgenie.com") || forwardedHost.includes("distpatchgeeni.com")) {
     return "https://dispatchgeeni.com";
   }
@@ -969,7 +980,7 @@ function getAppBaseUrl(req: express.Request): string {
     return `https://${forwardedHost}`;
   }
   // Production domain connected via Hostinger
-  return "https://dispatchgeeni.com";
+  return "https://easycleans.si";
 }
 
 export function getProjectId(req: express.Request): "dispatchgeeni" | "tidyups" {

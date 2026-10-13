@@ -282,6 +282,7 @@ export function App() {
     if (typeof window !== 'undefined') {
       const host = window.location.hostname || '';
       if (host.includes('tidyupscleaning')) return 'tidyups';
+      if (host.includes('easycleans')) return 'dispatchgeeni';
       if (host.includes('dispatchgeeni') || host.includes('dispatchgenie')) return 'dispatchgeeni';
       const saved = localStorage.getItem('active_project_id');
       if (saved === 'tidyups' || saved === 'dispatchgeeni') return saved;
@@ -349,7 +350,10 @@ export function App() {
   // Sync document title dynamically according to domain / activeProjectId
   useEffect(() => {
     if (typeof document !== 'undefined') {
-      if (activeProjectId === 'tidyups') {
+      const host = window.location.hostname || '';
+      if (host.includes('easycleans')) {
+        document.title = 'EasyCleans – Smart Field Service Dispatch & Scheduling';
+      } else if (activeProjectId === 'tidyups') {
         document.title = 'TidyUps Cleaning Operations – Live Dispatch Board & Customer Booking';
       } else {
         document.title = 'Dispatch Genie – Smart Field Service Dispatch & Scheduling';

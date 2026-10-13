@@ -958,6 +958,9 @@ function getAppBaseUrl(req: express.Request): string {
   }
   // Jobber strictly requires HTTPS for OAuth redirect URIs
   const forwardedHost = (req.headers["x-forwarded-host"] as string) || req.get("host") || "";
+  if (forwardedHost.includes("easycleans.si")) {
+    return "https://easycleans.si";
+  }
   if (forwardedHost.includes("dispatchgeeni.com") || forwardedHost.includes("dispatchgenie.com") || forwardedHost.includes("distpatchgeeni.com")) {
     return "https://dispatchgeeni.com";
   }
@@ -968,7 +971,7 @@ function getAppBaseUrl(req: express.Request): string {
     return `https://${forwardedHost}`;
   }
   // Production domain connected via Hostinger
-  return "https://dispatchgeeni.com";
+  return "https://easycleans.si";
 }
 
 export function getProjectId(req: express.Request): "dispatchgeeni" | "tidyups" {
