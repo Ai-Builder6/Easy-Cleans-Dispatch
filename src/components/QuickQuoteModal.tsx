@@ -38,7 +38,7 @@ interface QuickQuoteModalProps {
   calls?: any[];
   visits?: any[];
   clients?: any[];
-  projectId?: 'dispatchgeeni' | 'tidyups';
+  projectId?: 'easycleans' | 'dispatchgeeni' | 'tidyups';
 }
 
 export const QuickQuoteModal: React.FC<QuickQuoteModalProps> = ({
@@ -50,7 +50,7 @@ export const QuickQuoteModal: React.FC<QuickQuoteModalProps> = ({
   calls = [],
   visits = [],
   clients = [],
-  projectId = 'dispatchgeeni',
+  projectId = 'easycleans',
 }) => {
   // Calculator state matching Screenshot 2
   const [hours, setHours] = useState<number>(3);

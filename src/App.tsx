@@ -277,21 +277,20 @@ export function App() {
   const [isSyncingFirestore, setIsSyncingFirestore] = useState<boolean>(false);
   const [firestoreSyncStatus, setFirestoreSyncStatus] = useState<string | null>(null);
 
-  // Active Project Identification (Dispatch Genie vs TidyUps Cleaning Operations)
-  const [activeProjectId, setActiveProjectId] = useState<'dispatchgeeni' | 'tidyups'>(() => {
+  // Active Project Identification: 'easycleans' (default active platform) | 'dispatchgeeni' | 'tidyups'
+  const [activeProjectId, setActiveProjectId] = useState<'easycleans' | 'dispatchgeeni' | 'tidyups'>(() => {
     if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('active_project_id');
+      if (saved === 'easycleans' || saved === 'tidyups' || saved === 'dispatchgeeni') return saved as any;
       const host = window.location.hostname || '';
       if (host.includes('tidyupscleaning')) return 'tidyups';
-      if (host.includes('easycleans')) return 'dispatchgeeni';
       if (host.includes('dispatchgeeni') || host.includes('dispatchgenie')) return 'dispatchgeeni';
-      const saved = localStorage.getItem('active_project_id');
-      if (saved === 'tidyups' || saved === 'dispatchgeeni') return saved;
     }
-    return 'dispatchgeeni';
+    return 'easycleans';
   });
 
-  // Switch between the two isolated projects, updating persistent state and isolated store
-  const handleSwitchProject = useCallback(async (targetProj: 'dispatchgeeni' | 'tidyups') => {
+  // Switch between isolated projects, updating persistent state and isolated store
+  const handleSwitchProject = useCallback(async (targetProj: 'easycleans' | 'dispatchgeeni' | 'tidyups') => {
     setActiveProjectId(targetProj);
     if (typeof window !== 'undefined') {
       localStorage.setItem('active_project_id', targetProj);
@@ -350,9 +349,8 @@ export function App() {
   // Sync document title dynamically according to domain / activeProjectId
   useEffect(() => {
     if (typeof document !== 'undefined') {
-      const host = window.location.hostname || '';
-      if (host.includes('easycleans')) {
-        document.title = 'EasyCleans – Smart Field Service Dispatch & Scheduling';
+      if (activeProjectId === 'easycleans') {
+        document.title = 'EasyClean Operations – Live Field Service Dispatch & Booking';
       } else if (activeProjectId === 'tidyups') {
         document.title = 'TidyUps Cleaning Operations – Live Dispatch Board & Customer Booking';
       } else {
@@ -1375,8 +1373,21 @@ export function App() {
               <BookMyCleaningLogo projectId={activeProjectId} size={36} withText={true} />
             </div>
 
-            {/* Dual Project Switcher (Independent Projects) */}
+            {/* Triple Project Switcher (Independent Platforms & Isolated Stores) */}
             <div className="flex items-center bg-slate-100 p-0.5 rounded-xl border border-slate-200 text-xs font-bold shrink-0">
+              <button
+                type="button"
+                onClick={() => handleSwitchProject('easycleans')}
+                className={`px-2.5 py-1 rounded-lg transition-all flex items-center gap-1 cursor-pointer ${
+                  activeProjectId === 'easycleans'
+                    ? 'bg-blue-600 text-white shadow-2xs font-extrabold'
+                    : 'text-slate-600 hover:text-slate-900'
+                }`}
+                title="Switch to EasyClean (easycleans.si) - Dedicated Platform & Database"
+              >
+                <span>🧼</span>
+                <span className="hidden sm:inline">easycleans.si</span>
+              </button>
               <button
                 type="button"
                 onClick={() => handleSwitchProject('dispatchgeeni')}
@@ -1388,7 +1399,7 @@ export function App() {
                 title="Switch to Dispatch Genie (dispatchgeeni.com) - Isolated Database"
               >
                 <span>🚀</span>
-                <span className="hidden md:inline">dispatchgeeni.com</span>
+                <span className="hidden md:inline">dispatchgeeni</span>
               </button>
               <button
                 type="button"
@@ -1401,7 +1412,7 @@ export function App() {
                 title="Switch to TidyUps Operations (app.tidyupscleaning.com) - Isolated Database"
               >
                 <span>✨</span>
-                <span className="hidden md:inline">app.tidyupscleaning.com</span>
+                <span className="hidden md:inline">tidyups</span>
               </button>
             </div>
 
@@ -1461,8 +1472,21 @@ export function App() {
               <BookMyCleaningLogo projectId={activeProjectId} size={36} withText={true} />
             </div>
 
-            {/* Dual Project Switcher (Independent Projects) */}
+            {/* Triple Project Switcher (Independent Platforms & Isolated Stores) */}
             <div className="hidden xl:flex items-center bg-slate-100 p-0.5 rounded-xl border border-slate-200 text-xs font-bold shrink-0">
+              <button
+                type="button"
+                onClick={() => handleSwitchProject('easycleans')}
+                className={`px-2.5 py-1 rounded-lg transition-all flex items-center gap-1 cursor-pointer ${
+                  activeProjectId === 'easycleans'
+                    ? 'bg-blue-600 text-white shadow-2xs font-extrabold'
+                    : 'text-slate-600 hover:text-slate-900'
+                }`}
+                title="Switch to EasyClean (easycleans.si) - Dedicated Platform & Database"
+              >
+                <span>🧼</span>
+                <span>easycleans.si</span>
+              </button>
               <button
                 type="button"
                 onClick={() => handleSwitchProject('dispatchgeeni')}
@@ -1474,7 +1498,7 @@ export function App() {
                 title="Switch to Dispatch Genie (dispatchgeeni.com) - Isolated Database"
               >
                 <span>🚀</span>
-                <span>dispatchgeeni.com</span>
+                <span>dispatchgeeni</span>
               </button>
               <button
                 type="button"
@@ -1487,7 +1511,7 @@ export function App() {
                 title="Switch to TidyUps Operations (app.tidyupscleaning.com) - Isolated Database"
               >
                 <span>✨</span>
-                <span>app.tidyupscleaning.com</span>
+                <span>tidyups</span>
               </button>
             </div>
 

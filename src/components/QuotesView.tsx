@@ -30,7 +30,7 @@ interface QuotesViewProps {
   calls?: any[];
   visits?: any[];
   clients?: any[];
-  projectId?: 'dispatchgeeni' | 'tidyups';
+  projectId?: 'easycleans' | 'dispatchgeeni' | 'tidyups';
 }
 
 export const QuotesView: React.FC<QuotesViewProps> = ({
@@ -42,7 +42,7 @@ export const QuotesView: React.FC<QuotesViewProps> = ({
   calls = [],
   visits = [],
   clients = [],
-  projectId = 'dispatchgeeni',
+  projectId = 'easycleans',
 }) => {
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState<string>('ALL');

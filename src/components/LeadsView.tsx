@@ -79,7 +79,7 @@ interface LeadsViewProps {
   calls?: any[];
   visits?: any[];
   clients?: any[];
-  projectId?: 'dispatchgeeni' | 'tidyups';
+  projectId?: 'easycleans' | 'dispatchgeeni' | 'tidyups';
 }
 
 export const LeadsView: React.FC<LeadsViewProps> = ({
@@ -91,7 +91,7 @@ export const LeadsView: React.FC<LeadsViewProps> = ({
   calls = [],
   visits = [],
   clients = [],
-  projectId = 'dispatchgeeni',
+  projectId = 'easycleans',
 }) => {
   const [leadsList, setLeadsList] = useState<AdLeadItem[]>(initialLeads);
   const [statusFilter, setStatusFilter] = useState<LeadStatus>('New');

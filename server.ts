@@ -983,23 +983,31 @@ function getAppBaseUrl(req: express.Request): string {
   return "https://easycleans.si";
 }
 
-export function getProjectId(req: express.Request): "dispatchgeeni" | "tidyups" {
+export function getProjectId(req: express.Request): "easycleans" | "dispatchgeeni" | "tidyups" {
   const queryProj = (((req.query?.project as string) || (req.query?.projectId as string)) || "").trim().toLowerCase();
   if (queryProj.includes("tidyup")) return "tidyups";
   if (queryProj.includes("dispatch")) return "dispatchgeeni";
+  if (queryProj.includes("easyclean")) return "easycleans";
 
   const headerProj = ((req.headers?.["x-project-id"] as string) || "").trim().toLowerCase();
   if (headerProj.includes("tidyup")) return "tidyups";
   if (headerProj.includes("dispatch")) return "dispatchgeeni";
+  if (headerProj.includes("easyclean")) return "easycleans";
 
   const forwardedHost = (req.headers?.["x-forwarded-host"] as string) || req.get?.("host") || "";
   if (forwardedHost.includes("tidyupscleaning.com")) {
     return "tidyups";
   }
+  if (forwardedHost.includes("dispatchgeeni.com") || forwardedHost.includes("dispatchgenie.com")) {
+    return "dispatchgeeni";
+  }
   if (process.env.ACTIVE_PROJECT_ID === "tidyups") {
     return "tidyups";
   }
-  return "dispatchgeeni";
+  if (process.env.ACTIVE_PROJECT_ID === "dispatchgeeni") {
+    return "dispatchgeeni";
+  }
+  return "easycleans";
 }
 
 // Jobber Developer App & GraphQL Integration Endpoints (https://developer.getjobber.com/docs)

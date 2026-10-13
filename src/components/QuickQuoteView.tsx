@@ -36,7 +36,7 @@ interface QuickQuoteViewProps {
   visits?: any[];
   clients?: any[];
   quotes?: any[];
-  projectId?: 'dispatchgeeni' | 'tidyups';
+  projectId?: 'easycleans' | 'dispatchgeeni' | 'tidyups';
 }
 
 export const QuickQuoteView: React.FC<QuickQuoteViewProps> = ({
@@ -47,7 +47,7 @@ export const QuickQuoteView: React.FC<QuickQuoteViewProps> = ({
   visits = [],
   clients = [],
   quotes = [],
-  projectId = 'dispatchgeeni',
+  projectId = 'easycleans',
 }) => {
   // Hours & Crew Calculator
   const [hours, setHours] = useState<number>(3);

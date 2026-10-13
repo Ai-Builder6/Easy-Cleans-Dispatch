@@ -34,7 +34,7 @@ interface JobberSyncModalProps {
   tickets: ServiceTicket[];
   onTicketsUpdated?: (tickets: ServiceTicket[]) => void;
   onDataUpdated?: () => void;
-  projectId?: 'dispatchgeeni' | 'tidyups';
+  projectId?: 'easycleans' | 'dispatchgeeni' | 'tidyups';
 }
 
 export const JobberSyncModal: React.FC<JobberSyncModalProps> = ({
@@ -42,15 +42,17 @@ export const JobberSyncModal: React.FC<JobberSyncModalProps> = ({
   onClose,
   tickets,
   onDataUpdated,
-  projectId = 'dispatchgeeni',
+  projectId = 'easycleans',
 }) => {
-  const [activeProjectTab, setActiveProjectTab] = useState<'dispatchgeeni' | 'tidyups'>(projectId);
+  const [activeProjectTab, setActiveProjectTab] = useState<'easycleans' | 'dispatchgeeni' | 'tidyups'>(projectId);
 
   useEffect(() => {
     setActiveProjectTab(projectId);
   }, [projectId]);
 
-  const DOMAIN_REDIRECT_URI = activeProjectTab === 'tidyups'
+  const DOMAIN_REDIRECT_URI = activeProjectTab === 'easycleans'
+    ? 'https://easycleans.si/api/jobber/oauth/callback'
+    : activeProjectTab === 'tidyups'
     ? 'https://app.tidyupscleaning.com/api/jobber/oauth/callback'
     : 'https://dispatchgeeni.com/api/jobber/oauth/callback';
 

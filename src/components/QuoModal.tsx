@@ -40,7 +40,7 @@ interface QuoModalProps {
   onVisitCreated?: (newVisit: any) => void;
   clients?: any[];
   visits?: any[];
-  projectId?: 'dispatchgeeni' | 'tidyups';
+  projectId?: 'easycleans' | 'dispatchgeeni' | 'tidyups';
 }
 
 export interface QuoPhoneNumber {
@@ -59,7 +59,7 @@ export const QuoModal: React.FC<QuoModalProps> = ({
   onVisitCreated,
   clients = [],
   visits = [],
-  projectId = 'dispatchgeeni',
+  projectId = 'easycleans',
 }) => {
   const [activeTab, setActiveTab] = useState<'LINES' | 'TRANSCRIPTS' | 'CONTACTS'>('TRANSCRIPTS');
   const [apiKeyInput, setApiKeyInput] = useState('');

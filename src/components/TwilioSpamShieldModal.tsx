@@ -45,7 +45,7 @@ interface BlockedCallHistoryItem {
 interface TwilioSpamShieldModalProps {
   isOpen: boolean;
   onClose: () => void;
-  projectId?: 'dispatchgeeni' | 'tidyups';
+  projectId?: 'easycleans' | 'dispatchgeeni' | 'tidyups';
   preFillNumber?: string;
 }
 

@@ -5,7 +5,7 @@ interface LogoProps {
   size?: number;
   withText?: boolean;
   theme?: 'dark' | 'light';
-  projectId?: 'dispatchgeeni' | 'tidyups';
+  projectId?: 'easycleans' | 'dispatchgeeni' | 'tidyups';
 }
 
 export const BookMyCleaningLogo: React.FC<LogoProps> = ({
@@ -13,12 +13,19 @@ export const BookMyCleaningLogo: React.FC<LogoProps> = ({
   size = 36,
   withText = true,
   theme = 'light',
-  projectId = 'dispatchgeeni',
+  projectId = 'easycleans',
 }) => {
   const isTidyups = projectId === 'tidyups';
-  const brandTitle = isTidyups ? 'TidyUps Operations' : 'Dispatch Genie';
-  const brandBadge = isTidyups ? 'Official' : 'Pro';
-  const brandDomain = isTidyups ? 'app.tidyupscleaning.com' : 'dispatchgeeni.com';
+  const isEasycleans = projectId === 'easycleans';
+  
+  const brandTitle = isEasycleans
+    ? 'EasyClean Operations'
+    : isTidyups
+    ? 'TidyUps Operations'
+    : 'Dispatch Genie';
+
+  const brandBadge = isEasycleans ? 'Live' : isTidyups ? 'Official' : 'Pro';
+  const brandDomain = isEasycleans ? 'easycleans.si' : isTidyups ? 'app.tidyupscleaning.com' : 'dispatchgeeni.com';
   return (
     <div className={`flex items-center gap-2.5 select-none ${className}`}>
       {/* Icon Squircle Motif */}

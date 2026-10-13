@@ -23,7 +23,7 @@ interface InvoicesViewProps {
   onInvoicesUpdated?: (invoices: JobberInvoice[]) => void;
   onRefreshInvoices?: () => void;
   onBackToManagement?: () => void;
-  projectId?: 'dispatchgeeni' | 'tidyups';
+  projectId?: 'easycleans' | 'dispatchgeeni' | 'tidyups';
 }
 
 export const InvoicesView: React.FC<InvoicesViewProps> = ({
@@ -31,7 +31,7 @@ export const InvoicesView: React.FC<InvoicesViewProps> = ({
   onInvoicesUpdated,
   onRefreshInvoices,
   onBackToManagement,
-  projectId = 'dispatchgeeni',
+  projectId = 'easycleans',
 }) => {
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState<string>('ALL');

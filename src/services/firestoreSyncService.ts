@@ -15,7 +15,7 @@ import { Technician } from '../types/dispatch';
 import { JobberStaffMember } from './staffRosterService';
 
 // Target Firestore Database ID
-export const FIRESTORE_DATABASE_ID = 'ai-studio-cleaningserviced-8a2493ab-cb9d-4c28-a60b-c28e7d08d30e';
+export const FIRESTORE_DATABASE_ID = 'ai-studio-remixcleaningser-5a76a95a-bd95-4760-a869-beebafa19587';
 
 /**
  * Sanitizes an ID to conform to Firestore security rules regex: ^[a-zA-Z0-9_\-]+$

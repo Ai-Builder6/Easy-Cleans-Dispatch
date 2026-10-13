@@ -5,7 +5,7 @@ const IS_SERVERLESS = Boolean(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCT
 const BUNDLED_DATA_DIR = path.join(process.cwd(), "data");
 const DATA_DIR = IS_SERVERLESS ? "/tmp" : path.join(process.cwd(), "data");
 
-export type SupportedProjectId = "dispatchgeeni" | "tidyups";
+export type SupportedProjectId = "easycleans" | "dispatchgeeni" | "tidyups";
 
 export function resolveStoreFilePath(projectId?: string): string {
   const norm = (projectId || "").toLowerCase();
@@ -15,12 +15,8 @@ export function resolveStoreFilePath(projectId?: string): string {
   if (norm.includes("dispatch")) {
     return path.join(DATA_DIR, "dispatch_geeni_store.json");
   }
-  // Default to dispatch_geeni_store.json or legacy dispatch_store.json
-  const defaultFile = path.join(DATA_DIR, "dispatch_geeni_store.json");
-  if (fs.existsSync(defaultFile)) {
-    return defaultFile;
-  }
-  return path.join(DATA_DIR, "dispatch_store.json");
+  // Default to EasyClean dedicated store
+  return path.join(DATA_DIR, "easycleans_store.json");
 }
 
 export function resolveBundledStoreFilePath(projectId?: string): string {
@@ -31,11 +27,7 @@ export function resolveBundledStoreFilePath(projectId?: string): string {
   if (norm.includes("dispatch")) {
     return path.join(BUNDLED_DATA_DIR, "dispatch_geeni_store.json");
   }
-  const defaultFile = path.join(BUNDLED_DATA_DIR, "dispatch_geeni_store.json");
-  if (fs.existsSync(defaultFile)) {
-    return defaultFile;
-  }
-  return path.join(BUNDLED_DATA_DIR, "dispatch_store.json");
+  return path.join(BUNDLED_DATA_DIR, "easycleans_store.json");
 }
 
 export interface AppPersistentStore {
