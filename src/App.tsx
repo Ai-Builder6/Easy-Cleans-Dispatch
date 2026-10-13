@@ -1367,21 +1367,29 @@ export function App() {
         {!isZenMode && !isStaffAuthenticated && (
           <header
             id="customer-header"
-            className="h-16 px-3 sm:px-6 bg-white border-b border-slate-200 flex items-center justify-between flex-shrink-0 z-20 shadow-xs gap-3"
+            className="h-16 px-3 sm:px-6 bg-[#0D0D12] border-b border-white/10 flex items-center justify-between flex-shrink-0 z-20 shadow-xs gap-3 text-white font-inter"
           >
             <div className="flex items-center gap-2 sm:gap-3 cursor-pointer" onClick={() => setActiveTopView('CUSTOMER_PORTAL')}>
-              <BookMyCleaningLogo projectId={activeProjectId} size={36} withText={true} />
+              <BookMyCleaningLogo projectId={activeProjectId} size={36} withText={true} theme="dark" />
+            </div>
+
+            {/* Live Telemetry Status from Variation 2 */}
+            <div className="hidden lg:flex items-center gap-3">
+              <div className="flex items-center gap-2 px-2.5 py-1 rounded bg-[#15151E] border border-white/10 font-space-mono text-xs">
+                <div className="pulse-indicator"></div>
+                <span className="console-label text-white/80">Jobber Sync: Active</span>
+              </div>
             </div>
 
             {/* Triple Project Switcher (Independent Platforms & Isolated Stores) */}
-            <div className="flex items-center bg-slate-100 p-0.5 rounded-xl border border-slate-200 text-xs font-bold shrink-0">
+            <div className="flex items-center bg-[#15151E] p-0.5 rounded border border-white/10 text-xs font-bold shrink-0 font-space-mono">
               <button
                 type="button"
                 onClick={() => handleSwitchProject('easycleans')}
-                className={`px-2.5 py-1 rounded-lg transition-all flex items-center gap-1 cursor-pointer ${
+                className={`px-2.5 py-1 rounded transition-all flex items-center gap-1 cursor-pointer text-[11px] ${
                   activeProjectId === 'easycleans'
-                    ? 'bg-blue-600 text-white shadow-2xs font-extrabold'
-                    : 'text-slate-600 hover:text-slate-900'
+                    ? 'bg-pink-600 text-white shadow-2xs font-extrabold border border-pink-400/40'
+                    : 'text-white/60 hover:text-white'
                 }`}
                 title="Switch to EasyClean (easycleans.si) - Dedicated Platform & Database"
               >
@@ -1391,10 +1399,10 @@ export function App() {
               <button
                 type="button"
                 onClick={() => handleSwitchProject('dispatchgeeni')}
-                className={`px-2.5 py-1 rounded-lg transition-all flex items-center gap-1 cursor-pointer ${
+                className={`px-2.5 py-1 rounded transition-all flex items-center gap-1 cursor-pointer text-[11px] ${
                   activeProjectId === 'dispatchgeeni'
                     ? 'bg-purple-700 text-white shadow-2xs font-extrabold'
-                    : 'text-slate-600 hover:text-slate-900'
+                    : 'text-white/60 hover:text-white'
                 }`}
                 title="Switch to Dispatch Genie (dispatchgeeni.com) - Isolated Database"
               >
@@ -1404,10 +1412,10 @@ export function App() {
               <button
                 type="button"
                 onClick={() => handleSwitchProject('tidyups')}
-                className={`px-2.5 py-1 rounded-lg transition-all flex items-center gap-1 cursor-pointer ${
+                className={`px-2.5 py-1 rounded transition-all flex items-center gap-1 cursor-pointer text-[11px] ${
                   activeProjectId === 'tidyups'
                     ? 'bg-emerald-700 text-white shadow-2xs font-extrabold'
-                    : 'text-slate-600 hover:text-slate-900'
+                    : 'text-white/60 hover:text-white'
                 }`}
                 title="Switch to TidyUps Operations (app.tidyupscleaning.com) - Isolated Database"
               >
@@ -1420,15 +1428,15 @@ export function App() {
               {/* Toll-Free Hotline */}
               <a
                 href="tel:18338439877"
-                className="hidden md:flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r from-pink-50 to-purple-50 hover:from-pink-100 hover:to-purple-100 border border-pink-200/80 rounded-xl text-xs font-bold text-slate-800 transition-all cursor-pointer shadow-2xs group"
-                title="Dispatch Genie Toll-Free Hotline: 1-833-TIDYUPS (833-843-9877) or Direct Dispatch: (587) 900-7223"
+                className="hidden md:flex items-center gap-2 px-3 py-1.5 bg-[#15151E] hover:bg-[#1a1a26] border border-white/10 rounded text-xs font-bold text-white transition-all cursor-pointer shadow-2xs group"
+                title="EasyClean Hotline: 1-833-TIDYUPS (833-843-9877) or Direct Dispatch: (587) 900-7223"
               >
-                <div className="w-6 h-6 rounded-lg bg-gradient-to-tr from-pink-600 to-purple-600 text-white flex items-center justify-center shrink-0 shadow-2xs">
+                <div className="w-6 h-6 rounded bg-gradient-to-tr from-pink-600 to-purple-600 text-white flex items-center justify-center shrink-0 shadow-2xs">
                   <Phone className="w-3.5 h-3.5 text-white" />
                 </div>
                 <div className="flex flex-col text-left leading-tight">
-                  <span className="text-[11px] font-black tracking-tight text-purple-950 font-mono">1-833-TIDYUPS</span>
-                  <span className="text-[9px] text-pink-700 font-extrabold font-mono">(833-843-9877) • Dispatch: (587) 900-7223</span>
+                  <span className="text-[11px] font-black tracking-tight text-white font-space-mono">1-833-TIDYUPS</span>
+                  <span className="text-[9px] text-pink-400 font-bold font-space-mono">(833-843-9877) • Direct: (587) 900-7223</span>
                 </div>
               </a>
 
@@ -1438,24 +1446,24 @@ export function App() {
                   setActiveLegalTab('SUPPORT');
                   setActiveTopView('LEGAL');
                 }}
-                className={`min-h-[34px] px-3 py-1 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer ${
+                className={`min-h-[34px] px-3 py-1 rounded text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer border ${
                   activeTopView === 'LEGAL'
-                    ? 'bg-purple-100 text-purple-900 font-extrabold'
-                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                    ? 'bg-pink-600/20 text-pink-300 border-pink-500/40'
+                    : 'bg-[#15151E] text-white/70 hover:text-white border-white/10 hover:bg-[#1c1c28]'
                 }`}
               >
-                <HelpCircle className="w-3.5 h-3.5 text-fuchsia-600" />
+                <HelpCircle className="w-3.5 h-3.5 text-pink-400" />
                 <span className="hidden sm:inline">Support &amp; Policies</span>
               </button>
 
               {/* Staff & Dispatch Login */}
               <button
                 onClick={() => setIsRoleModalOpen(true)}
-                className="min-h-[36px] px-4 py-1.5 rounded-xl bg-gradient-to-r from-purple-700 via-purple-600 to-pink-600 hover:opacity-95 text-white font-extrabold text-xs flex items-center gap-2 shadow-xs transition-all active:scale-95 cursor-pointer"
+                className="min-h-[36px] px-4 py-1.5 rounded bg-gradient-to-r from-pink-600 to-purple-600 hover:opacity-95 text-white font-extrabold text-xs flex items-center gap-2 shadow-xs transition-all active:scale-95 cursor-pointer font-space-mono uppercase tracking-wider"
                 title="Staff Login: Owner, Dispatcher, and Cleaner Portals"
               >
                 <Lock className="w-3.5 h-3.5 text-white" />
-                <span>Staff &amp; Dispatch Login</span>
+                <span>Staff Login</span>
               </button>
             </div>
           </header>
@@ -1465,22 +1473,28 @@ export function App() {
         {!isZenMode && isStaffAuthenticated && (
           <header
             id="global-header"
-            className="h-14 min-h-[56px] landscape:max-md:h-11 landscape:max-md:min-h-[44px] px-2 sm:px-3 md:px-4 lg:px-5 bg-white border-b border-slate-200 flex items-center justify-between flex-shrink-0 z-20 shadow-xs gap-1.5 sm:gap-2.5 md:gap-3 overflow-x-auto no-scrollbar"
+            className="h-14 min-h-[56px] landscape:max-md:h-11 landscape:max-md:min-h-[44px] px-2 sm:px-3 md:px-4 lg:px-5 bg-[#0D0D12] border-b border-white/10 flex items-center justify-between flex-shrink-0 z-20 shadow-xs gap-1.5 sm:gap-2.5 md:gap-3 overflow-x-auto no-scrollbar text-white font-inter"
           >
             {/* Brand & Identity */}
             <div className="flex items-center gap-1.5 sm:gap-2.5 min-w-0 flex-shrink cursor-pointer" onClick={() => setActiveTopView('MAP')}>
-              <BookMyCleaningLogo projectId={activeProjectId} size={36} withText={true} />
+              <BookMyCleaningLogo projectId={activeProjectId} size={36} withText={true} theme="dark" />
+            </div>
+
+            {/* Variation 2 Status Indicators */}
+            <div className="hidden xl:flex items-center gap-2 px-2.5 py-1 rounded bg-[#15151E] border border-white/10 font-space-mono text-xs">
+              <div className="pulse-indicator"></div>
+              <span className="console-label text-white/80">Jobber: Synced</span>
             </div>
 
             {/* Triple Project Switcher (Independent Platforms & Isolated Stores) */}
-            <div className="hidden xl:flex items-center bg-slate-100 p-0.5 rounded-xl border border-slate-200 text-xs font-bold shrink-0">
+            <div className="hidden lg:flex items-center bg-[#15151E] p-0.5 rounded border border-white/10 text-xs font-bold shrink-0 font-space-mono">
               <button
                 type="button"
                 onClick={() => handleSwitchProject('easycleans')}
-                className={`px-2.5 py-1 rounded-lg transition-all flex items-center gap-1 cursor-pointer ${
+                className={`px-2.5 py-1 rounded transition-all flex items-center gap-1 cursor-pointer text-[11px] ${
                   activeProjectId === 'easycleans'
-                    ? 'bg-blue-600 text-white shadow-2xs font-extrabold'
-                    : 'text-slate-600 hover:text-slate-900'
+                    ? 'bg-pink-600 text-white shadow-2xs font-extrabold border border-pink-400/40'
+                    : 'text-white/60 hover:text-white'
                 }`}
                 title="Switch to EasyClean (easycleans.si) - Dedicated Platform & Database"
               >
@@ -1490,10 +1504,10 @@ export function App() {
               <button
                 type="button"
                 onClick={() => handleSwitchProject('dispatchgeeni')}
-                className={`px-2.5 py-1 rounded-lg transition-all flex items-center gap-1 cursor-pointer ${
+                className={`px-2.5 py-1 rounded transition-all flex items-center gap-1 cursor-pointer text-[11px] ${
                   activeProjectId === 'dispatchgeeni'
                     ? 'bg-purple-700 text-white shadow-2xs font-extrabold'
-                    : 'text-slate-600 hover:text-slate-900'
+                    : 'text-white/60 hover:text-white'
                 }`}
                 title="Switch to Dispatch Genie (dispatchgeeni.com) - Isolated Database"
               >
@@ -1503,10 +1517,10 @@ export function App() {
               <button
                 type="button"
                 onClick={() => handleSwitchProject('tidyups')}
-                className={`px-2.5 py-1 rounded-lg transition-all flex items-center gap-1 cursor-pointer ${
+                className={`px-2.5 py-1 rounded transition-all flex items-center gap-1 cursor-pointer text-[11px] ${
                   activeProjectId === 'tidyups'
                     ? 'bg-emerald-700 text-white shadow-2xs font-extrabold'
-                    : 'text-slate-600 hover:text-slate-900'
+                    : 'text-white/60 hover:text-white'
                 }`}
                 title="Switch to TidyUps Operations (app.tidyupscleaning.com) - Isolated Database"
               >
@@ -1518,20 +1532,20 @@ export function App() {
             {/* Vanity Line & Direct Dispatch Badge */}
             <a
               href="tel:18338439877"
-              className="hidden 2xl:flex items-center gap-2 px-2.5 py-1 bg-gradient-to-r from-pink-50 to-purple-50 hover:from-pink-100 hover:to-purple-100 border border-pink-200/80 rounded-xl text-xs font-bold text-slate-800 transition-all cursor-pointer shadow-2xs shrink-0 group"
-              title="Call Dispatch Genie Vanity Line: 1-833-TIDYUPS (833-843-9877) or Direct Dispatch: (587) 900-7223"
+              className="hidden 2xl:flex items-center gap-2 px-2.5 py-1 bg-[#15151E] hover:bg-[#1a1a26] border border-white/10 rounded text-xs font-bold text-white transition-all cursor-pointer shadow-2xs shrink-0 group"
+              title="Call EasyClean Hotline: 1-833-TIDYUPS (833-843-9877) or Direct Dispatch: (587) 900-7223"
             >
-              <div className="w-6 h-6 rounded-lg bg-gradient-to-tr from-pink-600 to-purple-600 text-white flex items-center justify-center shrink-0 shadow-2xs">
+              <div className="w-6 h-6 rounded bg-gradient-to-tr from-pink-600 to-purple-600 text-white flex items-center justify-center shrink-0 shadow-2xs">
                 <Phone className="w-3.5 h-3.5 text-white" />
               </div>
               <div className="flex flex-col text-left leading-tight">
-                <span className="text-[11px] font-black tracking-tight text-purple-950 font-mono">1-833-TIDYUPS</span>
-                <span className="text-[9px] text-pink-700 font-extrabold font-mono">(833-843-9877) • Dispatch: (587) 900-7223</span>
+                <span className="text-[11px] font-black tracking-tight text-white font-space-mono">1-833-TIDYUPS</span>
+                <span className="text-[9px] text-pink-400 font-bold font-space-mono">(833-843-9877) • Dispatch: (587) 900-7223</span>
               </div>
             </a>
 
             {/* Dedicated Top Bar Primary Navigation Tabs */}
-            <div className="flex items-center gap-1 bg-slate-100/90 p-1 rounded-xl border border-slate-200/80 flex-shrink-0">
+            <div className="flex items-center gap-1 bg-[#15151E] p-1 rounded border border-white/10 flex-shrink-0">
               {currentUser.role === 'CLEANER' ? (
                 <>
                   <button
@@ -1542,8 +1556,8 @@ export function App() {
                     }}
                     className={`min-h-[34px] px-3 py-1 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer ${
                       activeTopView === 'MAP' && !cleanerShowMap
-                        ? 'bg-gradient-to-r from-pink-600 to-purple-600 text-white shadow-xs font-extrabold'
-                        : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
+                        ? 'bg-pink-600 text-white shadow-xs font-extrabold border border-pink-400/30'
+                        : 'text-white/60 hover:text-white hover:bg-white/10'
                     }`}
                   >
                     <Truck className="w-3.5 h-3.5" />
@@ -1558,8 +1572,8 @@ export function App() {
                     }}
                     className={`min-h-[34px] px-3 py-1 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer ${
                       activeTopView === 'MAP' && cleanerShowMap
-                        ? 'bg-gradient-to-r from-pink-600 to-purple-600 text-white shadow-xs font-extrabold'
-                        : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
+                        ? 'bg-pink-600 text-white shadow-xs font-extrabold border border-pink-400/30'
+                        : 'text-white/60 hover:text-white hover:bg-white/10'
                     }`}
                   >
                     <Navigation className="w-3.5 h-3.5" />
@@ -1572,11 +1586,11 @@ export function App() {
                   onClick={() => setActiveTopView('MAP')}
                   className={`min-h-[34px] px-3 py-1 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer ${
                     activeTopView === 'MAP'
-                      ? 'bg-gradient-to-r from-pink-600 to-purple-600 text-white shadow-xs font-extrabold'
-                      : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
+                      ? 'bg-pink-600 text-white shadow-xs font-extrabold border border-pink-400/30'
+                      : 'text-white/60 hover:text-white hover:bg-white/10'
                   }`}
                 >
-                  <MapIcon className={`w-3.5 h-3.5 ${activeTopView === 'MAP' ? 'text-white' : 'text-pink-600'}`} />
+                  <MapIcon className={`w-3.5 h-3.5 ${activeTopView === 'MAP' ? 'text-white' : 'text-pink-400'}`} />
                   <span>Dispatch Map</span>
                 </button>
               )}
@@ -1588,12 +1602,12 @@ export function App() {
                   onClick={() => setActiveTopView('ADDRESS_SEARCH')}
                   className={`min-h-[34px] px-3 py-1 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer ${
                     activeTopView === 'ADDRESS_SEARCH'
-                      ? 'bg-gradient-to-r from-pink-600 to-purple-600 text-white shadow-xs font-extrabold'
-                      : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
+                      ? 'bg-pink-600 text-white shadow-xs font-extrabold border border-pink-400/30'
+                      : 'text-white/60 hover:text-white hover:bg-white/10'
                   }`}
                   title="Caller Address Search & Cleaner Distance Radar (/radar, /search)"
                 >
-                  <Compass className={`w-3.5 h-3.5 ${activeTopView === 'ADDRESS_SEARCH' ? 'text-white' : 'text-purple-600'}`} />
+                  <Compass className={`w-3.5 h-3.5 ${activeTopView === 'ADDRESS_SEARCH' ? 'text-white' : 'text-purple-400'}`} />
                   <span>Address Radar</span>
                 </button>
               )}
@@ -1621,10 +1635,10 @@ export function App() {
                 <button
                   id="nav-quick-replies"
                   onClick={() => setIsQuickRepliesOpen(true)}
-                  className="min-h-[34px] px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer bg-pink-50 hover:bg-pink-100 text-pink-800 border border-pink-200/80 shadow-2xs active:scale-95"
+                  className="min-h-[34px] px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer bg-pink-500/15 hover:bg-pink-500/25 text-pink-300 border border-pink-400/30 shadow-2xs active:scale-95"
                   title="Client-ready SMS Quick Replies for Standard, Deep & Move-Out Cleaning"
                 >
-                  <MessageSquare className="w-3.5 h-3.5 text-pink-600" />
+                  <MessageSquare className="w-3.5 h-3.5 text-pink-400" />
                   <span className="hidden sm:inline">SMS Replies</span>
                 </button>
               )}
@@ -1634,12 +1648,12 @@ export function App() {
                 onClick={() => setActiveTopView('CUSTOMER_PORTAL')}
                 className={`min-h-[34px] px-3 py-1 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer ${
                   activeTopView === 'CUSTOMER_PORTAL'
-                    ? 'bg-gradient-to-r from-pink-600 to-purple-600 text-white shadow-xs font-extrabold'
-                    : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
+                    ? 'bg-pink-600 text-white shadow-xs font-extrabold border border-pink-400/30'
+                    : 'text-white/60 hover:text-white hover:bg-white/10'
                 }`}
                 title="Customer Booking & Services Portal (/book)"
               >
-                <Sparkles className={`w-3.5 h-3.5 ${activeTopView === 'CUSTOMER_PORTAL' ? 'text-white' : 'text-fuchsia-600'}`} />
+                <Sparkles className={`w-3.5 h-3.5 ${activeTopView === 'CUSTOMER_PORTAL' ? 'text-white' : 'text-fuchsia-400'}`} />
                 <span>Customer Booking Portal</span>
               </button>
 
@@ -1653,16 +1667,16 @@ export function App() {
                     }}
                     className={`min-h-[34px] px-3 py-1 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer ${
                       activeTopView === 'SCHEDULED_JOBS'
-                        ? 'bg-gradient-to-r from-pink-600 to-purple-600 text-white shadow-xs font-extrabold'
-                        : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
+                        ? 'bg-pink-600 text-white shadow-xs font-extrabold border border-pink-400/30'
+                        : 'text-white/60 hover:text-white hover:bg-white/10'
                     }`}
                     title="Scheduled and Unscheduled Jobs from Jobber"
                   >
-                    <Calendar className={`w-3.5 h-3.5 ${activeTopView === 'SCHEDULED_JOBS' ? 'text-white' : 'text-purple-600'}`} />
+                    <Calendar className={`w-3.5 h-3.5 ${activeTopView === 'SCHEDULED_JOBS' ? 'text-white' : 'text-purple-400'}`} />
                     <span>Schedule &amp; Calendar</span>
                     {scheduledJobsList.length > 0 && (
                       <span className={`px-1.5 py-0.2 rounded-full text-[10px] font-mono ${
-                        activeTopView === 'SCHEDULED_JOBS' ? 'bg-white/20 text-white' : 'bg-pink-100 text-pink-700'
+                        activeTopView === 'SCHEDULED_JOBS' ? 'bg-white/20 text-white' : 'bg-white/10 text-white/80'
                       }`}>
                         {scheduledJobsList.length}
                       </span>
@@ -1675,15 +1689,15 @@ export function App() {
                     onClick={() => setActiveTopView('CLIENTS')}
                     className={`min-h-[34px] px-3 py-1 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer ${
                       activeTopView === 'CLIENTS'
-                        ? 'bg-gradient-to-r from-pink-600 to-purple-600 text-white shadow-xs font-extrabold'
-                        : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
+                        ? 'bg-pink-600 text-white shadow-xs font-extrabold border border-pink-400/30'
+                        : 'text-white/60 hover:text-white hover:bg-white/10'
                     }`}
                     title="Clients database, lead verdicts, phone numbers & Jobber sync (/clients)"
                   >
-                    <Users className={`w-3.5 h-3.5 ${activeTopView === 'CLIENTS' ? 'text-white' : 'text-blue-600'}`} />
+                    <Users className={`w-3.5 h-3.5 ${activeTopView === 'CLIENTS' ? 'text-white' : 'text-blue-400'}`} />
                     <span>Clients</span>
                     <span className={`px-1.5 py-0.2 rounded-full text-[10px] font-mono ${
-                      activeTopView === 'CLIENTS' ? 'bg-white/20 text-white' : 'bg-blue-100 text-blue-800 font-bold'
+                      activeTopView === 'CLIENTS' ? 'bg-white/20 text-white' : 'bg-white/10 text-white/80 font-bold'
                     }`}>
                       {clientsList.length}
                     </span>
@@ -1695,15 +1709,15 @@ export function App() {
                     onClick={() => setActiveTopView('LEADS')}
                     className={`min-h-[34px] px-3 py-1 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer ${
                       activeTopView === 'LEADS'
-                        ? 'bg-gradient-to-r from-pink-600 to-rose-600 text-white shadow-xs font-extrabold'
-                        : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
+                        ? 'bg-pink-600 text-white shadow-xs font-extrabold border border-pink-400/30'
+                        : 'text-white/60 hover:text-white hover:bg-white/10'
                     }`}
                     title="Ad Leads from Google Sheets (FB Leads, Google Ads, forms) (/leads)"
                   >
-                    <Flame className={`w-3.5 h-3.5 ${activeTopView === 'LEADS' ? 'text-white' : 'text-rose-600'}`} />
+                    <Flame className={`w-3.5 h-3.5 ${activeTopView === 'LEADS' ? 'text-white' : 'text-rose-400'}`} />
                     <span>Leads</span>
                     <span className={`px-1.5 py-0.2 rounded-full text-[10px] font-mono font-bold ${
-                      activeTopView === 'LEADS' ? 'bg-white/20 text-white' : 'bg-rose-100 text-rose-700'
+                      activeTopView === 'LEADS' ? 'bg-white/20 text-white' : 'bg-white/10 text-white/80'
                     }`}>
                       {leadsList.length > 99 ? '99+' : leadsList.length}
                     </span>
@@ -1715,12 +1729,12 @@ export function App() {
                     onClick={() => setActiveTopView('QUICK_QUOTE')}
                     className={`min-h-[34px] px-3 py-1 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer ${
                       activeTopView === 'QUICK_QUOTE'
-                        ? 'bg-gradient-to-r from-pink-600 to-purple-600 text-white shadow-xs font-extrabold'
-                        : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
+                        ? 'bg-pink-600 text-white shadow-xs font-extrabold border border-pink-400/30'
+                        : 'text-white/60 hover:text-white hover:bg-white/10'
                     }`}
                     title="Fast Phone Estimator & Booking (1 cleaner $52.50/hr, 2 cleaners $105/hr) (/quote)"
                   >
-                    <Calculator className={`w-3.5 h-3.5 ${activeTopView === 'QUICK_QUOTE' ? 'text-white' : 'text-pink-600'}`} />
+                    <Calculator className={`w-3.5 h-3.5 ${activeTopView === 'QUICK_QUOTE' ? 'text-white' : 'text-pink-400'}`} />
                     <span>Quick Quote</span>
                   </button>
 
@@ -1730,13 +1744,13 @@ export function App() {
                     onClick={() => setActiveTopView('MANAGEMENT')}
                     className={`min-h-[34px] px-3 py-1 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer ${
                       ['MANAGEMENT', 'QUOTES', 'INVOICES', 'LEGAL'].includes(activeTopView)
-                        ? 'bg-gradient-to-r from-pink-600 to-purple-600 text-white shadow-xs font-extrabold'
-                        : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
+                        ? 'bg-pink-600 text-white shadow-xs font-extrabold border border-pink-400/30'
+                        : 'text-white/60 hover:text-white hover:bg-white/10'
                     }`}
                     title="Management: Quotes, Invoices, Staff Roster, Policies & Terms (/management)"
                   >
                     <SlidersHorizontal className={`w-3.5 h-3.5 ${
-                      ['MANAGEMENT', 'QUOTES', 'INVOICES', 'LEGAL'].includes(activeTopView) ? 'text-white' : 'text-indigo-600'
+                      ['MANAGEMENT', 'QUOTES', 'INVOICES', 'LEGAL'].includes(activeTopView) ? 'text-white' : 'text-indigo-400'
                     }`} />
                     <span>Management</span>
                   </button>
@@ -1764,12 +1778,12 @@ export function App() {
                       setIsBoardCollapsed((c) => !c);
                     }
                   }}
-                  className={`min-h-[34px] sm:min-h-[36px] landscape:max-md:min-h-[32px] px-2 sm:px-2.5 md:px-3 py-1 sm:py-1.5 landscape:max-md:py-1 rounded-xl border text-xs font-semibold flex items-center gap-1 sm:gap-1.5 shadow-2xs transition-colors cursor-pointer flex-shrink-0 ${
+                  className={`min-h-[34px] sm:min-h-[36px] landscape:max-md:min-h-[32px] px-2 sm:px-2.5 md:px-3 py-1 sm:py-1.5 landscape:max-md:py-1 rounded-lg border text-xs font-semibold flex items-center gap-1 sm:gap-1.5 transition-colors cursor-pointer flex-shrink-0 ${
                     (viewportMode.isMobileLandscape && !isLandscapeDrawerOpen) ||
                     (viewportMode.isMobilePortrait && mobileSheetState === 'collapsed') ||
                     (!viewportMode.isMobileLandscape && !viewportMode.isMobilePortrait && isBoardCollapsed)
-                      ? 'bg-blue-50 border-blue-200 text-blue-700 hover:bg-blue-100'
-                      : 'bg-slate-50 hover:bg-slate-100 border-slate-200 text-slate-700'
+                      ? 'bg-pink-600/20 border-pink-400/40 text-pink-300 hover:bg-pink-600/30'
+                      : 'bg-[#15151E] hover:bg-white/10 border-white/10 text-white/80'
                   }`}
                   title="Toggle Dispatch Board"
                   aria-label="Toggle Dispatch Board"
@@ -1778,17 +1792,17 @@ export function App() {
                   (viewportMode.isMobilePortrait && mobileSheetState === 'collapsed') ||
                   (!viewportMode.isMobileLandscape && !viewportMode.isMobilePortrait && isBoardCollapsed) ? (
                     <>
-                      <PanelRightOpen className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-blue-600 shrink-0" />
+                      <PanelRightOpen className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-pink-400 shrink-0" />
                       <span className="hidden md:inline landscape:max-md:hidden">Show Board</span>
                       {unassignedCount > 0 && (
-                        <span className="min-w-[18px] h-4 px-1 rounded-full bg-red-600 text-white text-[10px] font-bold flex items-center justify-center font-mono leading-none">
+                        <span className="min-w-[18px] h-4 px-1 rounded-full bg-pink-600 text-white text-[10px] font-bold flex items-center justify-center font-mono leading-none">
                           {unassignedCount}
                         </span>
                       )}
                     </>
                   ) : (
                     <>
-                      <PanelRightClose className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-slate-600 shrink-0" />
+                      <PanelRightClose className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white/60 shrink-0" />
                       <span className="hidden md:inline landscape:max-md:hidden">Hide Board</span>
                     </>
                   )}
@@ -1800,11 +1814,11 @@ export function App() {
                 <button
                   id="topbar-zen-mode-btn"
                   onClick={() => setIsZenMode(true)}
-                  className="hidden xl:flex min-h-[34px] sm:min-h-[36px] px-2.5 py-1.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700 text-xs font-semibold items-center gap-1 shadow-2xs transition-colors cursor-pointer flex-shrink-0"
+                  className="hidden xl:flex min-h-[34px] sm:min-h-[36px] px-2.5 py-1.5 rounded-lg border border-white/10 bg-[#15151E] hover:bg-white/10 text-white/80 text-xs font-semibold items-center gap-1 transition-colors cursor-pointer flex-shrink-0"
                   title="Full Screen Map Mode (hides all chrome and panels)"
                   aria-label="Full screen map mode"
                 >
-                  <Maximize2 className="w-3.5 h-3.5 text-slate-600" />
+                  <Maximize2 className="w-3.5 h-3.5 text-white/60" />
                   <span>Full Map</span>
                 </button>
               )}
@@ -1813,32 +1827,30 @@ export function App() {
               <button
                 id="topbar-chat-btn"
                 onClick={() => setIsChatOpen((c) => !c)}
-                className={`min-h-[34px] sm:min-h-[36px] landscape:max-md:min-h-[32px] px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl border text-xs font-bold flex items-center gap-1.5 transition-all shadow-2xs whitespace-nowrap cursor-pointer flex-shrink-0 ${
+                className={`min-h-[34px] sm:min-h-[36px] landscape:max-md:min-h-[32px] px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg border text-xs font-bold flex items-center gap-1.5 transition-all shadow-2xs whitespace-nowrap cursor-pointer flex-shrink-0 ${
                   isChatOpen
-                    ? 'bg-gradient-to-r from-pink-600 to-purple-600 text-white border-transparent'
-                    : 'bg-pink-50 hover:bg-pink-100 text-pink-900 border-pink-200'
+                    ? 'bg-pink-600 text-white border-pink-400/40'
+                    : 'bg-[#15151E] hover:bg-white/10 text-white/80 border-white/10'
                 }`}
                 title="Internal Team Messaging: Chat with cleaners, dispatchers and owner"
                 aria-label="Open Team Chat"
               >
-                <MessageSquare className={`w-3.5 h-3.5 ${isChatOpen ? 'text-white' : 'text-pink-600'}`} />
+                <MessageSquare className={`w-3.5 h-3.5 ${isChatOpen ? 'text-white' : 'text-pink-400'}`} />
                 <span className="hidden sm:inline">Team Chat</span>
                 <span className="sm:hidden">Chat</span>
               </button>
 
-              {/* Active User Login / Role Switcher */}
+              {/* Active User Login / Role Switcher - Variation 2 User Badge */}
               <button
                 id="topbar-role-switcher-btn"
                 onClick={() => setIsRoleModalOpen(true)}
-                className="min-h-[34px] sm:min-h-[36px] landscape:max-md:min-h-[32px] px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-300 text-slate-800 text-xs font-bold flex items-center gap-1.5 transition-all shadow-2xs whitespace-nowrap cursor-pointer flex-shrink-0"
+                className="min-h-[34px] sm:min-h-[36px] landscape:max-md:min-h-[32px] px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-[#15151E] hover:bg-white/10 border border-white/10 text-white text-xs font-bold flex items-center gap-2 transition-all shadow-2xs whitespace-nowrap cursor-pointer flex-shrink-0 font-space-mono"
                 title={`Active Login: ${currentUser.name} (${currentUser.role}). Click to switch role/account.`}
                 aria-label="Switch User or Role"
               >
-                <span className={`w-2 h-2 rounded-full ${
-                  currentUser.role === 'OWNER' ? 'bg-purple-600' : currentUser.role === 'DISPATCHER' ? 'bg-pink-600' : 'bg-emerald-600'
-                }`} />
-                <span className="hidden md:inline font-extrabold">{currentUser.name}</span>
-                <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-white text-slate-700 uppercase">
+                <span className="console-label text-white/50">User:</span>
+                <span className="text-[11px] font-bold text-white truncate max-w-[100px]">{currentUser.name.split(' ')[0]}</span>
+                <span className="text-[9px] px-1.5 py-0.5 rounded bg-pink-500/20 text-pink-300 border border-pink-400/30 uppercase">
                   {currentUser.role}
                 </span>
               </button>
@@ -1848,11 +1860,11 @@ export function App() {
                 <button
                   id="topbar-quo-btn"
                   onClick={() => setIsQuoModalOpen(true)}
-                  className="min-h-[34px] sm:min-h-[36px] landscape:max-md:min-h-[32px] px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl bg-violet-50 hover:bg-violet-100 text-violet-800 border border-violet-300 text-xs font-bold flex items-center gap-1.5 transition-all shadow-2xs whitespace-nowrap cursor-pointer flex-shrink-0"
+                  className="min-h-[34px] sm:min-h-[36px] landscape:max-md:min-h-[32px] px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-[#15151E] hover:bg-white/10 text-violet-300 border border-white/10 text-xs font-bold flex items-center gap-1.5 transition-all shadow-2xs whitespace-nowrap cursor-pointer flex-shrink-0"
                   title="Quo (OpenPhone) 5-Line System: Call tracking and Sona voice transcription"
                   aria-label="Open Quo Phone Integration"
                 >
-                  <PhoneCall className="w-3.5 h-3.5 text-violet-600 shrink-0" aria-hidden="true" />
+                  <PhoneCall className="w-3.5 h-3.5 text-violet-400 shrink-0" aria-hidden="true" />
                   <span className="hidden sm:inline">Quo (5 Lines)</span>
                   <span className="sm:hidden">Quo</span>
                 </button>
@@ -1863,11 +1875,11 @@ export function App() {
                 <button
                   id="topbar-spam-shield-btn"
                   onClick={() => handleOpenSpamShield()}
-                  className="min-h-[34px] sm:min-h-[36px] landscape:max-md:min-h-[32px] px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-800 border border-rose-300 text-xs font-bold flex items-center gap-1.5 transition-all shadow-2xs whitespace-nowrap cursor-pointer flex-shrink-0"
+                  className="min-h-[34px] sm:min-h-[36px] landscape:max-md:min-h-[32px] px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-[#15151E] hover:bg-white/10 text-rose-300 border border-white/10 text-xs font-bold flex items-center gap-1.5 transition-all shadow-2xs whitespace-nowrap cursor-pointer flex-shrink-0"
                   title="Twilio Spam Shield: Block country codes, rotating numbers & robocalls"
                   aria-label="Open Twilio Spam Shield"
                 >
-                  <ShieldAlert className="w-3.5 h-3.5 text-rose-600 shrink-0" aria-hidden="true" />
+                  <ShieldAlert className="w-3.5 h-3.5 text-rose-400 shrink-0" aria-hidden="true" />
                   <span className="hidden sm:inline">Spam Shield</span>
                   <span className="sm:hidden">Shield</span>
                 </button>
@@ -1880,11 +1892,11 @@ export function App() {
               <button
                 id="topbar-public-book-btn"
                 onClick={() => setIsPublicBookingModalOpen(true)}
-                className="min-h-[34px] sm:min-h-[36px] landscape:max-md:min-h-[32px] px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl bg-teal-50 hover:bg-teal-100 text-teal-800 border border-teal-300 text-xs font-bold flex items-center gap-1.5 transition-all shadow-2xs whitespace-nowrap cursor-pointer flex-shrink-0"
-                title="Public Customer Booking Form for bookmycleaning.net"
+                className="min-h-[34px] sm:min-h-[36px] landscape:max-md:min-h-[32px] px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-[#15151E] hover:bg-white/10 text-teal-300 border border-white/10 text-xs font-bold flex items-center gap-1.5 transition-all shadow-2xs whitespace-nowrap cursor-pointer flex-shrink-0"
+                title="Public Customer Booking Form"
                 aria-label="Open Public Booking Form"
               >
-                <Globe className="w-3.5 h-3.5 text-teal-600 shrink-0" aria-hidden="true" />
+                <Globe className="w-3.5 h-3.5 text-teal-400 shrink-0" aria-hidden="true" />
                 <span className="hidden sm:inline">Book Online</span>
                 <span className="sm:hidden">Book</span>
               </button>
@@ -1894,11 +1906,11 @@ export function App() {
                 <button
                   id="topbar-jobber-btn"
                   onClick={() => setIsJobberModalOpen(true)}
-                  className="min-h-[34px] sm:min-h-[36px] landscape:max-md:min-h-[32px] px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 text-xs font-bold flex items-center gap-1.5 transition-all shadow-2xs whitespace-nowrap cursor-pointer flex-shrink-0"
+                  className="min-h-[34px] sm:min-h-[36px] landscape:max-md:min-h-[32px] px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-[#15151E] hover:bg-white/10 text-emerald-300 border border-white/10 text-xs font-bold flex items-center gap-1.5 transition-all shadow-2xs whitespace-nowrap cursor-pointer flex-shrink-0"
                   title="Jobber Integration: Sync clients, invoices, quotes & visits"
                   aria-label="Open Jobber Integration Hub"
                 >
-                  <Database className="w-3.5 h-3.5 text-emerald-600 shrink-0" aria-hidden="true" />
+                  <Database className="w-3.5 h-3.5 text-emerald-400 shrink-0" aria-hidden="true" />
                   <span className="hidden sm:inline">Jobber Sync</span>
                   <span className="sm:hidden">Jobber</span>
                 </button>
@@ -1909,11 +1921,11 @@ export function App() {
                 <button
                   id="topbar-new-ticket-btn"
                   onClick={() => setIsNewTicketModalOpen(true)}
-                  className="min-h-[34px] sm:min-h-[36px] landscape:max-md:min-h-[32px] px-2 sm:px-2.5 md:px-3 py-1 sm:py-1.5 landscape:max-md:py-1 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold flex items-center gap-1 sm:gap-1.5 transition-colors shadow-xs whitespace-nowrap cursor-pointer flex-shrink-0"
+                  className="min-h-[34px] sm:min-h-[36px] landscape:max-md:min-h-[32px] px-2.5 sm:px-3 py-1 sm:py-1.5 landscape:max-md:py-1 rounded-lg bg-pink-600 hover:bg-pink-700 text-white text-xs font-bold flex items-center gap-1 sm:gap-1.5 transition-all shadow-xs whitespace-nowrap cursor-pointer flex-shrink-0 border border-pink-400/40"
                   aria-label="Create New Service Ticket with Voice or Text"
                   title="Create New Service Ticket (Microphone Voice-to-Text Supported)"
                 >
-                  <Plus className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-blue-400 shrink-0" aria-hidden="true" />
+                  <Plus className="w-3.5 h-3.5 text-white shrink-0" aria-hidden="true" />
                   <span>Ticket</span>
                 </button>
               )}
@@ -1923,11 +1935,11 @@ export function App() {
                 <button
                   id="topbar-ai-dispatcher-btn"
                   onClick={() => setIsAiModalOpen(true)}
-                  className="min-h-[34px] sm:min-h-[36px] landscape:max-md:min-h-[32px] px-2.5 sm:px-3 py-1 sm:py-1.5 landscape:max-md:py-1 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold flex items-center gap-1.5 shadow-xs active:scale-95 transition-all whitespace-nowrap cursor-pointer flex-shrink-0"
+                  className="min-h-[34px] sm:min-h-[36px] landscape:max-md:min-h-[32px] px-2.5 sm:px-3 py-1 sm:py-1.5 landscape:max-md:py-1 rounded-lg bg-gradient-to-r from-purple-600 to-indigo-600 hover:opacity-95 text-white text-xs font-bold flex items-center gap-1.5 shadow-xs active:scale-95 transition-all whitespace-nowrap cursor-pointer flex-shrink-0 border border-purple-400/40"
                   aria-label="Open AI Dispatch Assistant"
                   title="Open AI Dispatch Assistant"
                 >
-                  <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-blue-200 shrink-0" aria-hidden="true" />
+                  <Sparkles className="w-3.5 h-3.5 text-purple-200 shrink-0" aria-hidden="true" />
                   <span className="font-semibold">AI Dispatch</span>
                 </button>
               )}
@@ -1935,10 +1947,10 @@ export function App() {
               {/* Staff Sign Out & Lock Console Button */}
               <button
                 onClick={handleLogout}
-                className="min-h-[34px] sm:min-h-[36px] landscape:max-md:min-h-[32px] px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl bg-slate-100 hover:bg-rose-50 hover:text-rose-700 hover:border-rose-200 border border-slate-300 text-slate-700 text-xs font-bold flex items-center gap-1.5 transition-all shadow-2xs whitespace-nowrap cursor-pointer flex-shrink-0"
+                className="min-h-[34px] sm:min-h-[36px] landscape:max-md:min-h-[32px] px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-[#15151E] hover:bg-rose-500/20 hover:text-rose-300 hover:border-rose-400/40 border border-white/10 text-white/70 text-xs font-bold flex items-center gap-1.5 transition-all shadow-2xs whitespace-nowrap cursor-pointer flex-shrink-0"
                 title="Sign out of staff console and return to Customer Portal"
               >
-                <LogOut className="w-3.5 h-3.5 text-rose-600" />
+                <LogOut className="w-3.5 h-3.5 text-rose-400" />
                 <span className="hidden xl:inline">Sign Out</span>
               </button>
             </div>
@@ -2409,57 +2421,67 @@ export function App() {
         {!isZenMode && (
           <footer
             id="global-footer"
-            className="h-8 bg-slate-800 text-slate-400 hidden sm:flex landscape:max-md:hidden items-center px-4 justify-between text-[10px] shrink-0 font-medium z-20 border-t border-slate-700"
+            className="h-10 bg-[#0D0D12] text-white/50 hidden sm:flex landscape:max-md:hidden items-center px-6 justify-between text-[11px] shrink-0 font-space-mono z-20 border-t border-white/10 select-none"
           >
             <div className="flex items-center gap-4">
-              <span>Fleet Health: <span className="text-emerald-400 font-bold">Optimal</span></span>
-              <span>Cleaners: <span className="text-slate-200 font-mono">15 Active Cleaners</span></span>
+              <span className="flex items-center gap-1.5">
+                <span className="console-label text-white/40">Fleet:</span>
+                <span className="text-emerald-400 font-bold">15/15 Active</span>
+              </span>
+              <span className="text-white/20">|</span>
               <a
-                href={activeProjectId === 'tidyups' ? 'https://app.tidyupscleaning.com' : 'https://dispatchgeeni.com'}
+                href={activeProjectId === 'easycleans' ? 'https://easycleans.si' : activeProjectId === 'tidyups' ? 'https://app.tidyupscleaning.com' : 'https://dispatchgeeni.com'}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`hidden lg:inline font-mono font-semibold ${
-                  activeProjectId === 'tidyups' ? 'text-emerald-400 hover:text-emerald-300' : 'text-purple-400 hover:text-purple-300'
+                className={`hidden lg:inline font-bold ${
+                  activeProjectId === 'easycleans'
+                    ? 'text-pink-400 hover:text-pink-300'
+                    : activeProjectId === 'tidyups'
+                    ? 'text-emerald-400 hover:text-emerald-300'
+                    : 'text-purple-400 hover:text-purple-300'
                 }`}
               >
-                {activeProjectId === 'tidyups' ? 'app.tidyupscleaning.com' : 'dispatchgeeni.com'}
+                {activeProjectId === 'easycleans' ? 'easycleans.si' : activeProjectId === 'tidyups' ? 'app.tidyupscleaning.com' : 'dispatchgeeni.com'}
               </a>
-              <span className="hidden xl:inline text-pink-400 font-mono font-bold">1-833-TIDYUPS</span>
-              <div className="hidden sm:flex items-center gap-2 border-l border-slate-700 pl-3">
+              <span className="hidden xl:inline text-pink-400 font-bold">1-833-TIDYUPS</span>
+              <div className="hidden sm:flex items-center gap-2 border-l border-white/10 pl-3">
                 <button
                   onClick={() => {
                     setActiveLegalTab('SUPPORT');
                     setActiveTopView('LEGAL');
                   }}
-                  className="hover:text-slate-200 cursor-pointer"
+                  className="hover:text-white cursor-pointer transition-colors"
                 >
                   /support
                 </button>
-                <span>•</span>
+                <span className="text-white/20">•</span>
                 <button
                   onClick={() => {
                     setActiveLegalTab('TERMS');
                     setActiveTopView('LEGAL');
                   }}
-                  className="hover:text-slate-200 cursor-pointer"
+                  className="hover:text-white cursor-pointer transition-colors"
                 >
-                  /T&amp;C
+                  /terms
                 </button>
-                <span>•</span>
+                <span className="text-white/20">•</span>
                 <button
                   onClick={() => {
                     setActiveLegalTab('PRIVACY');
                     setActiveTopView('LEGAL');
                   }}
-                  className="hover:text-slate-200 cursor-pointer"
+                  className="hover:text-white cursor-pointer transition-colors"
                 >
-                  /privacy-policy
+                  /privacy
                 </button>
               </div>
             </div>
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
-              <span className="uppercase tracking-widest text-slate-300">Clean Dispatch YEG v4.22</span>
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-1.5 px-2 py-0.5 rounded bg-[#15151E] border border-white/10">
+                <div className="pulse-indicator"></div>
+                <span className="text-[10px] text-white/70">Jobber Sync: Active</span>
+              </div>
+              <span className="text-white/40 text-[10px] tracking-wider uppercase">EasyClean Ops v5.0</span>
             </div>
           </footer>
         )}
@@ -2635,17 +2657,17 @@ export function App() {
 
         {/* Firestore Sync Toast Notification */}
         {firestoreSyncStatus && (
-          <div className="fixed bottom-5 right-5 z-50 bg-slate-900 border border-purple-500/50 shadow-2xl rounded-2xl p-4 text-white text-xs flex items-center gap-3 animate-in fade-in slide-in-from-bottom-3 duration-200 max-w-md">
-            <div className="w-8 h-8 rounded-xl bg-purple-600/30 text-purple-400 border border-purple-500/40 flex items-center justify-center shrink-0">
+          <div className="fixed bottom-5 right-5 z-50 bg-[#15151E] border border-pink-500/40 shadow-2xl rounded-xl p-4 text-white text-xs flex items-center gap-3 animate-in fade-in slide-in-from-bottom-3 duration-200 max-w-md">
+            <div className="w-8 h-8 rounded-lg bg-pink-600/30 text-pink-400 border border-pink-500/40 flex items-center justify-center shrink-0">
               <Sparkles className="w-4 h-4" />
             </div>
             <div className="flex-1">
-              <span className="font-extrabold text-purple-300 block">Cloud Firestore Sync</span>
-              <p className="text-slate-300 text-[11px] mt-0.5 leading-snug">{firestoreSyncStatus}</p>
+              <span className="font-extrabold text-pink-300 block font-space-mono">Cloud Firestore Sync</span>
+              <p className="text-white/70 text-[11px] mt-0.5 leading-snug">{firestoreSyncStatus}</p>
             </div>
             <button
               onClick={() => setFirestoreSyncStatus(null)}
-              className="text-slate-400 hover:text-white p-1 rounded-lg"
+              className="text-white/40 hover:text-white p-1 rounded-lg cursor-pointer"
             >
               ✕
             </button>

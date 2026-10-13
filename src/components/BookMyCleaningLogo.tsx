@@ -63,22 +63,22 @@ export const BookMyCleaningLogo: React.FC<LogoProps> = ({
       {withText && (
         <div className="flex flex-col justify-center min-w-0">
           <div className="flex items-center gap-1.5 leading-none">
-            <span className={`font-extrabold tracking-tight text-sm sm:text-base ${
-              theme === 'dark' ? 'text-white' : 'text-slate-900'
+            <span className={`font-syne font-extrabold uppercase tracking-tight text-sm sm:text-base ${
+              theme === 'dark' ? 'text-white' : 'text-slate-900 dark:text-white'
             }`}>
               {brandTitle}
             </span>
-            <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-full uppercase tracking-wider border ${
-              isTidyups
-                ? 'bg-emerald-500/10 text-emerald-600 border-emerald-500/20'
-                : 'bg-gradient-to-r from-pink-500/10 to-purple-500/10 text-pink-600 border-pink-500/20'
+            <span className={`console-tag text-[9px] font-bold px-1.5 py-0.2 rounded uppercase tracking-wider ${
+              isEasycleans
+                ? 'bg-pink-500/15 text-pink-400 border-pink-500/40'
+                : isTidyups
+                ? 'bg-emerald-500/15 text-emerald-400 border-emerald-500/40'
+                : 'bg-purple-500/15 text-purple-400 border-purple-500/40'
             }`}>
               {brandBadge}
             </span>
           </div>
-          <span className={`text-[10px] font-medium tracking-tight ${
-            theme === 'dark' ? 'text-slate-400' : 'text-slate-500'
-          }`}>
+          <span className="font-space-mono text-[9px] uppercase tracking-wider text-slate-500 dark:text-white/50 mt-0.5">
             {brandDomain}
           </span>
         </div>

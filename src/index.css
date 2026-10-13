@@ -1,21 +1,95 @@
 @import "tailwindcss";
 
-/* Book My Cleaning / Tidyups Signature Theme Variables */
+/* Variation 2 Console Tokens */
 :root {
   --sat: env(safe-area-inset-top, 0px);
   --sab: env(safe-area-inset-bottom, 0px);
   --sal: env(safe-area-inset-left, 0px);
   --sar: env(safe-area-inset-right, 0px);
 
-  /* Book My Cleaning Palette */
-  --bmc-dark-bg: #0d0a12;
-  --bmc-card-bg: #15101d;
-  --bmc-border: #281d38;
+  /* Variation 2 Design Palette */
+  --bg: #0D0D12;
+  --surface: #15151E;
+  --surface-card: #1a1a26;
+  --ink: #FFFFFF;
+  --ink-dim: rgba(255, 255, 255, 0.6);
+  --ink-faint: rgba(255, 255, 255, 0.1);
+  --accent: #ec4899;
+  --accent-dim: rgba(236, 72, 153, 0.15);
+  --border: 2px solid var(--ink);
+  --border-thin: 1px solid var(--ink-faint);
+
+  /* Legacy Fallbacks */
+  --bmc-dark-bg: #0D0D12;
+  --bmc-card-bg: #15151E;
+  --bmc-border: rgba(255, 255, 255, 0.12);
   --bmc-coral: #FF7B54;
   --bmc-pink: #ec4899;
   --bmc-magenta: #ef3ecf;
   --bmc-purple: #a855f7;
   --bmc-violet: #8b5cf6;
+}
+
+/* Typography Helpers */
+.font-syne {
+  font-family: 'Syne', sans-serif;
+}
+
+.font-space-mono {
+  font-family: 'Space Mono', monospace;
+}
+
+.font-inter {
+  font-family: 'Inter', sans-serif;
+}
+
+/* Variation 2 Console Styles */
+.console-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--ink-dim);
+}
+
+.console-stat-value {
+  font-family: 'Space Mono', monospace;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.console-card {
+  border: 1px solid var(--ink-faint);
+  background: rgba(255, 255, 255, 0.025);
+  border-radius: 4px;
+}
+
+.console-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  padding: 2px 6px;
+  background: var(--accent-dim);
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 2px;
+}
+
+.pulse-indicator {
+  width: 8px;
+  height: 8px;
+  background: #10b981;
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
+}
+
+.bg-dot-matrix {
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--bg);
 }
 
 /* Accessible focus ring indicators for keyboard navigation (WCAG 2.4.7 / 2.4.11) */
